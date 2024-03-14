@@ -2,7 +2,8 @@ pandas
 seaborn
 matplotlib
 numpy
-scikit-learn
+scikit-learn==1.2.1
 plotly
 jupyter
 tensorflow==2.10.0
+streamlit
