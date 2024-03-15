@@ -5,7 +5,6 @@ from custom_loss import custom_loss_function
 import pickle
 import base64
 
-
 def main():
     # Set the page configuration
     st.set_page_config(
