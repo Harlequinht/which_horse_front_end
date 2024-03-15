@@ -33,13 +33,14 @@ for team_member in team_data:
     st.markdown('---')  # Add a horizontal line between team members
     
     # Define the pages
-pages = ['Home', 'About Us', 'Which Horse', 'Our Model']
+# pages = ['Home', 'About Us', 'Which Horse', 'Our Model']
 
 # Sidebar navigation
-st.sidebar.page_link('webapp.py', label='home')
-st.sidebar.page_link('pages/about_us.py', label='about us')
-st.sidebar.page_link('pages/which_horse.py', label='which horse')
-st.sidebar.page_link('pages/our_model.py', label='our model')
+with st.sidebar:
+    st.page_link('webapp.py', label='home')
+    st.page_link('pages/about_us.py', label='about us')
+    st.page_link('pages/our_model.py', label='our model')  
+    st.page_link('pages/which_horse.py', label='which horse') 
 
 # # Display content based on the selected page
 # if selected_page == 'Home':

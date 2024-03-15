@@ -96,10 +96,11 @@ with inter_cols_pace:
         #          ''')
 
 # Sidebar navigation
-st.sidebar.page_link('webapp.py', label='home')
-st.sidebar.page_link('pages/about_us.py', label='about us')
-st.sidebar.page_link('pages/which_horse.py', label='which horse')
-st.sidebar.page_link('pages/our_model.py', label='our model')   
+with st.sidebar:
+    st.page_link('webapp.py', label='home')
+    st.page_link('pages/about_us.py', label='about us')
+    st.page_link('pages/our_model.py', label='our model')  
+    st.page_link('pages/which_horse.py', label='which horse')
 # elif selected_page == 'About Us':
 #     st.switch_page('pages/about_us.py')
 
