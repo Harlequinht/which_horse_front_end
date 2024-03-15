@@ -21,7 +21,7 @@ if __name__ == "__main__":
 st.markdown("""
     <style>
     section[data-testid="stSidebar"][aria-expanded="true"]{
-        height: 40% !important;
+        height: 31% !important;
     }
     section[data-testid="stSidebar"][aria-expanded="false"]{
         height: 10% !important;
@@ -97,10 +97,23 @@ with inter_cols_pace:
 
 # Sidebar navigation
 with st.sidebar:
-    st.page_link('webapp.py', label='home')
-    st.page_link('pages/about_us.py', label='about us')
-    st.page_link('pages/our_model.py', label='our model')  
-    st.page_link('pages/which_horse.py', label='which horse')
+    if st.button("home"):
+        st.switch_page('webapp.py')
+    
+    if st.button('about us'):
+        st.switch_page('pages/about_us.py')
+        
+    if st.button('our model'):
+        st.switch_page('pages/our_model.py')
+
+    if st.button('which horse'):
+        st.switch_page('pages/which_horse.py')
+        
+# with st.sidebar:
+#     st.page_link('webapp.py', label='home')
+#     st.page_link('pages/about_us.py', label='about us')
+#     st.page_link('pages/our_model.py', label='our model')  
+#     st.page_link('pages/which_horse.py', label='which horse')
 # elif selected_page == 'About Us':
 #     st.switch_page('pages/about_us.py')
 
