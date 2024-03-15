@@ -2,14 +2,14 @@ import streamlit as st
 import pandas as pd
 from pipeline_cleaning import clean_data
 from sklearn.metrics import precision_score, recall_score, f1_score, accuracy_score
-from webapp import load_pipe_model  
+from home import load_pipe_model  
 from keras.utils import get_custom_objects
 
 
 st.markdown("""
     <style>
     section[data-testid="stSidebar"][aria-expanded="true"]{
-        height: 40% !important;
+        height: 31% !important;
     }
     section[data-testid="stSidebar"][aria-expanded="false"]{
         height: 10% !important;
@@ -54,10 +54,24 @@ if uploaded_file is not None:
         st.error(f"Error: {e}")
         
 # Sidebar navigation
-st.sidebar.page_link('webapp.py', label='home')
-st.sidebar.page_link('pages/about_us.py', label='about us')
-st.sidebar.page_link('pages/which_horse.py', label='which horse')
-st.sidebar.page_link('pages/our_model.py', label='our model')
+# with st.sidebar:
+#     if st.button("home", key=9):
+#         st.switch_page('webapp.py')
+    
+#     if st.button('about us', key=10):
+#         st.switch_page('pages/about_us.py')
+        
+#     if st.button('our model', key=11):
+#         st.switch_page('pages/our_model.py')
+
+#     if st.button('which horse', key=12):
+#         st.switch_page('pages/which_horse.py')
+# with st.sidebar:
+#     st.page_link('webapp.py', label='home')
+#     st.page_link('pages/about_us.py', label='about us')
+#     st.page_link('pages/our_model.py', label='our model')  
+#     st.page_link('pages/which_horse.py', label='which horse')
+
         
 #             # Define the pages
 # pages = ['Home', 'About Us', 'Which Horse', 'Our Model']

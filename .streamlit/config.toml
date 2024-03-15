@@ -15,6 +15,3 @@ textColor="#FFFFFF"
 # Accepted values (serif | sans serif | monospace)
 # Default: "sans serif"
 font="sans serif"
-
-[client]
-showSidebarNavigation = false

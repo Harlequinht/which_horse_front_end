@@ -5,7 +5,6 @@ from custom_loss import custom_loss_function
 import pickle
 import base64
 
-
 def main():
     # Set the page configuration
     st.set_page_config(
@@ -21,13 +20,13 @@ if __name__ == "__main__":
 st.markdown("""
     <style>
     section[data-testid="stSidebar"][aria-expanded="true"]{
-        height: 40% !important;
+        height: 31% !important;
     }
     section[data-testid="stSidebar"][aria-expanded="false"]{
         height: 10% !important;
     }
     .st-emotion-cache-16txtl3 {
-        padding: 2rem 1.5rem;
+        padding: 1rem 1.5rem;
     }
     </style>""", unsafe_allow_html=True)
 # Your data loading and cleaning functions go here
@@ -96,10 +95,24 @@ with inter_cols_pace:
         #          ''')
 
 # Sidebar navigation
-st.sidebar.page_link('webapp.py', label='home')
-st.sidebar.page_link('pages/about_us.py', label='about us')
-st.sidebar.page_link('pages/which_horse.py', label='which horse')
-st.sidebar.page_link('pages/our_model.py', label='our model')   
+# with st.sidebar:
+#     if st.button("home", key=1):
+#         st.switch_page('webapp.py')
+    
+#     if st.button('about us', key=2):
+#         st.switch_page('pages/about_us.py')
+        
+#     if st.button('our model', key=3):
+#         st.switch_page('pages/our_model.py')
+
+#     if st.button('which horse', key=4):
+#         st.switch_page('pages/which_horse.py')
+        
+# with st.sidebar:
+#     st.page_link('webapp.py', label='home')
+#     st.page_link('pages/about_us.py', label='about us')
+#     st.page_link('pages/our_model.py', label='our model')  
+#     st.page_link('pages/which_horse.py', label='which horse')
 # elif selected_page == 'About Us':
 #     st.switch_page('pages/about_us.py')
 
