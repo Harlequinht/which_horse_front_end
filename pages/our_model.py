@@ -55,16 +55,16 @@ if uploaded_file is not None:
         
 # Sidebar navigation
 with st.sidebar:
-    if st.button("home"):
+    if st.button("home", key=9):
         st.switch_page('webapp.py')
     
-    if st.button('about us'):
+    if st.button('about us', key=10):
         st.switch_page('pages/about_us.py')
         
-    if st.button('our model'):
+    if st.button('our model', key=11):
         st.switch_page('pages/our_model.py')
 
-    if st.button('which horse'):
+    if st.button('which horse', key=12):
         st.switch_page('pages/which_horse.py')
 # with st.sidebar:
 #     st.page_link('webapp.py', label='home')

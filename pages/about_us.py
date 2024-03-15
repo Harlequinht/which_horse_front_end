@@ -37,16 +37,16 @@ for team_member in team_data:
 
 # Sidebar navigation
 with st.sidebar:
-    if st.button("home"):
+    if st.button("home", key=5):
         st.switch_page('webapp.py')
     
-    if st.button('about us'):
+    if st.button('about us', key=6):
         st.switch_page('pages/about_us.py')
         
-    if st.button('our model'):
+    if st.button('our model', key=7):
         st.switch_page('pages/our_model.py')
 
-    if st.button('which horse'):
+    if st.button('which horse', key=8):
         st.switch_page('pages/which_horse.py')
         
 # with st.sidebar:
