@@ -94,4 +94,4 @@ st.sidebar.page_link('pages/our_model.py', label='our model')
 #     st.switch_page('pages/which_horse.py')
     
 # elif selected_page == 'Our Model':
-    st.switch_page('pages/our_model.py')
+    # st.switch_page('pages/our_model.py')
