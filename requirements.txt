@@ -6,4 +6,4 @@ scikit-learn==1.2.1
 plotly
 tensorflow==2.10.0
 streamlit==1.32.2
-protobuf==3.20.0
+#protobuf==3.20.0
