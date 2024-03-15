@@ -1,161 +1,110 @@
 import streamlit as st
-import pandas as pd
-import numpy as np
-import toml
-from pipeline_cleaning import clean_data
-from custom_loss import custom_loss_function
 from tensorflow.keras.models import load_model
+from keras.utils import get_custom_objects
+from custom_loss import custom_loss_function
 import pickle
-from sklearn.metrics import precision_score, recall_score, f1_score, accuracy_score
+import base64
 
 
 def main():
     # Set the page configuration
     st.set_page_config(
+        page_title="home",
         layout="wide",
-        initial_sidebar_state="auto",
+        initial_sidebar_state="collapsed",
+        page_icon=":horse:"
     )
 
 if __name__ == "__main__":
     main()
-
+    
+st.markdown("""
+    <style>
+    section[data-testid="stSidebar"][aria-expanded="true"]{
+        height: 40% !important;
+    }
+    section[data-testid="stSidebar"][aria-expanded="false"]{
+        height: 10% !important;
+    }
+    .st-emotion-cache-16txtl3 {
+        padding: 2rem 1.5rem;
+    }
+    </style>""", unsafe_allow_html=True)
 # Your data loading and cleaning functions go here
-page_bg_img = '''
-<style>
-body {
-background-image: url("https://images.unsplash.com/photo-1542281286-9e0a16bb7366");
-background-size: cover;
-}
-</style>
-'''
+
 # Loading pipeline
 pipe = pickle.load(open('softmax_pipeline.pkl', 'rb'))
 
 # Loading model
-model = load_model('softmax.h5')
+get_custom_objects().update({"custom_loss_function": custom_loss_function})
+model = load_model('softmax.h5', custom_objects = {"custom_loss_function": custom_loss_function})
 
-st.markdown(page_bg_img, unsafe_allow_html=True)
+def load_pipe_model():
+    return pipe, model
+
 # Define the pages
 pages = ['Home', 'About Us', 'Which Horse', 'Our Model']
 
 # Sidebar navigation
-selected_page = st.sidebar.selectbox('Navigation', pages)
+# selected_page = st.sidebar.selectbox('Navigation', pages)
+
 
 # Display content based on the selected page
-if selected_page == 'Home':
-    st.markdown('## Which Horse')
-    st.write('''Horse racing holds significant economic and entertainment value, attracting widespread attention from enthusiasts and bettors.
+# if selected_page == 'Home':
+    
+# st.switch_page('pages/home.py')
+# @st.cache(allow_output_mutation=True)
+def get_base64_of_bin_file(bin_file):
+    with open(bin_file, 'rb') as f:
+        data = f.read()
+    return base64.b64encode(data).decode()
 
-             \nCreating machine learning models to predict horserace outcomes is crucial for enhancing betting strategies, improving the accuracy of odds, and providing valuable insights to both industry professionals and casual participants, ultimately contributing to a more informed and engaging horse racing experience.
-             ''')
+def set_png_as_page_bg(png_file):
+    bin_str = get_base64_of_bin_file(png_file)
+    page_bg_img = '''
+        <style>
+        .stApp {
+            background-image: url("data:image/png;base64,%s");
+            background-size:  cover;
+            background-repeat: no-repeat;
+            background-color: transparent;
+            background-position: center
+        }
+        </style>
+    ''' % bin_str
+    
+    st.markdown(page_bg_img, unsafe_allow_html=True)
+    return
 
-elif selected_page == 'About Us':
-    st.markdown('## Meet the Which Horse Team')
-    st.write('''
-             Meet the dedicated team behind Which Horse, responsible for the end-to-end development and delivery of our predictive models.
-             ''')
+set_png_as_page_bg('images/horse_racing.jpg')
 
-    team_data = [
-        {"name": "Harlequin", "image_url": "./team_photos/harlequin_photo.jpeg", "bio": "As a former Cruise Director, he aspire to deepen their understanding of Data Science, particularly \nfocusing on Machine Learning and the practical applications of big data across diverse industries."},
-        {"name": "Rob", "image_url": "./team_photos/rob_photo.jpeg", "bio": "Aspiring Data Scientist with a background in Mechanical Engineering, Project Management and Consultancy."},
-        {"name": "Amanda", "image_url": "./team_photos/amanda_photo.jpeg", "bio": "She is a Data Science and Analytics professional, holding a degree in Veterinary Medicine, and currently \npursuing post-graduation studies in the field of Data Science and Analysis."},
-        {"name": "Tomi", "image_url": "./team_photos/tomi_photo.jpeg", "bio": "After working in finance, she decided to learn coding to automate tasks that used to take hours, integrating \nGoogle's Query Language into various processes upon mastering basic SQL syntax."},
-        {"name": "David", "image_url": "./team_photos/david_photo.jpeg", "bio": "A Levels graduate embracing a transformative gap year, I'm now eager to reimmerse myself in the world of learning! "},
-    ]
 
-    for team_member in team_data:
-        st.subheader(team_member["name"])
-        st.image(team_member["image_url"], width=150,  use_column_width=False)
-        st.text(team_member["bio"])
-        st.markdown('---')  # Add a horizontal line between team members
+# st.markdown('## Which Horse')
+col1, inter_cols_pace = st.columns((3, 2))
+with inter_cols_pace:
+    with st.container():
+        title = "Which Horse"
+        content = """Horse racing holds significant economic and entertainment value, attracting widespread attention from enthusiasts and bettors. 
+        Creating machine learning models to predict horserace outcomes is crucial for enhancing betting strategies, improving the accuracy of odds, and providing valuable insights 
+        to both industry professionals and casual participants, ultimately contributing to a more informed and engaging horse racing experience."""
+        # st.title("Which Horse")
+        st.markdown(f'<h1 style="font-size: 65px; text-align:center; text-shadow: 3px 3px 12px black;font:raleway;">{title}</h1>', unsafe_allow_html=True)
+        st.markdown(f'<p style="text-align:center; text-shadow: 3px 3px 12px black;font:raleway;">{content}</p>', unsafe_allow_html=True)
+        #  st.write('''Horse racing holds significant economic and entertainment value, attracting widespread attention from enthusiasts and bettors.
 
-elif selected_page == 'Which Horse':
-    st.markdown('## Which Horse')
+        #          \nCreating machine learning models to predict horserace outcomes is crucial for enhancing betting strategies, improving the accuracy of odds, and providing valuable insights to both industry professionals and casual participants, ultimately contributing to a more informed and engaging horse racing experience.
+        #          ''')
 
-    st.markdown('## Model 1')
-    @st.cache_data
-    def get_line_chart_data():
+# Sidebar navigation
+st.sidebar.page_link('webapp.py', label='home')
+st.sidebar.page_link('pages/about_us.py', label='about us')
+st.sidebar.page_link('pages/which_horse.py', label='which horse')
+st.sidebar.page_link('pages/our_model.py', label='our model')   
+# elif selected_page == 'About Us':
+#     st.switch_page('pages/about_us.py')
 
-        return pd.DataFrame(
-                np.random.randn(20, 3),
-                columns=['a', 'b', 'c']
-            )
-
-    df = get_line_chart_data()
-
-    st.line_chart(df)
-
-    st.markdown('## Model 2')
-    @st.cache_data
-    def get_line_chart_data():
-
-        return pd.DataFrame(
-                np.random.randn(20, 3),
-                columns=['a', 'b', 'c']
-            )
-
-    df = get_line_chart_data()
-
-    st.line_chart(df)
-
-    st.markdown('## Model 3')
-    @st.cache_data
-    def get_line_chart_data():
-
-        return pd.DataFrame(
-                np.random.randn(20, 3),
-                columns=['a', 'b', 'c']
-            )
-
-    df = get_line_chart_data()
-
-    st.line_chart(df)
-
-    st.markdown('## Model 4')
-    @st.cache_data
-    def get_line_chart_data():
-
-        return pd.DataFrame(
-                np.random.randn(20, 3),
-                columns=['a', 'b', 'c']
-            )
-
-    df = get_line_chart_data()
-
-    st.line_chart(df)
-
-    # Add more content as needed
-
-elif selected_page == 'Our Model':
-    uploaded_file = st.file_uploader("Choose a csv file", type='csv')
-    # st.write(pipeline.get_feature_names_out())
-    if uploaded_file is not None:
-        try:
-            df = pd.read_csv(uploaded_file)
-            if df.empty:
-                st.error("Error: Submitted file is empty")
-            else:
-                st.success("Performing relevant checks and displaying metrics...")
-                if st.button('Predict'):
-                    df_clean = clean_data(df)
-                    X_pred = df_clean.drop(columns=['bsp','event_number','meeting_id', 'win_or_lose', 'horse_id', 'place', '15_mins', '10_mins', '5_mins', '3_mins', '2_mins', '1_min_'])
-                    print('Data cleaned')
-                    X_pred_transform = pd.DataFrame(pipe.transform(X_pred), columns= pd.Series(pipe.get_feature_names_out()).str.split('__', expand=True)[1])
-                    print('Data transformed')
-                    predct = model.predict(X_pred_transform)
-                    results_df = pd.DataFrame({'y_pred': predct.round(2)[:,0], 'y_true': df_clean['win_or_lose'].replace(0.5, 1.0)})
-                    results_df['y_pred_050'] = results_df.y_pred.map(lambda x: 1.0 if x>=0.5 else 0.0)
-                    st.write(results_df)
-
-                    scores = {
-                        'accuracy': [accuracy_score(results_df.y_true, results_df.y_pred_050)],
-                        'precision': [precision_score(results_df.y_true, results_df.y_pred_050)],
-                        'recall': [recall_score(results_df.y_true, results_df.y_pred_050)],
-                        'f1': [f1_score(results_df.y_true, results_df.y_pred_050)]
-                    }
-                    scores_df = pd.DataFrame(scores)
-                    scores_df
-                    X_pred_transform
-
-        except Exception as e:
-            st.error(f"Error: {e}")
+# elif selected_page == 'Which Horse':
+#     st.switch_page('pages/which_horse.py')
+    
+# elif selected_page == 'Our Model':
+#     st.switch_page('pages/our_model.py')
