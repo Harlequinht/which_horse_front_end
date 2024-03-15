@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 from pipeline_cleaning import clean_data
 from sklearn.metrics import precision_score, recall_score, f1_score, accuracy_score
-from webapp import load_pipe_model  
+from home import load_pipe_model  
 from keras.utils import get_custom_objects
 
 
@@ -54,18 +54,18 @@ if uploaded_file is not None:
         st.error(f"Error: {e}")
         
 # Sidebar navigation
-with st.sidebar:
-    if st.button("home", key=9):
-        st.switch_page('webapp.py')
+# with st.sidebar:
+#     if st.button("home", key=9):
+#         st.switch_page('webapp.py')
     
-    if st.button('about us', key=10):
-        st.switch_page('pages/about_us.py')
+#     if st.button('about us', key=10):
+#         st.switch_page('pages/about_us.py')
         
-    if st.button('our model', key=11):
-        st.switch_page('pages/our_model.py')
+#     if st.button('our model', key=11):
+#         st.switch_page('pages/our_model.py')
 
-    if st.button('which horse', key=12):
-        st.switch_page('pages/which_horse.py')
+#     if st.button('which horse', key=12):
+#         st.switch_page('pages/which_horse.py')
 # with st.sidebar:
 #     st.page_link('webapp.py', label='home')
 #     st.page_link('pages/about_us.py', label='about us')

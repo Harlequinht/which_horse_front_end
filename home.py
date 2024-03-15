@@ -27,7 +27,7 @@ st.markdown("""
         height: 10% !important;
     }
     .st-emotion-cache-16txtl3 {
-        padding: 2rem 1.5rem;
+        padding: 1rem 1.5rem;
     }
     </style>""", unsafe_allow_html=True)
 # Your data loading and cleaning functions go here
@@ -96,18 +96,18 @@ with inter_cols_pace:
         #          ''')
 
 # Sidebar navigation
-with st.sidebar:
-    if st.button("home", key=1):
-        st.switch_page('webapp.py')
+# with st.sidebar:
+#     if st.button("home", key=1):
+#         st.switch_page('webapp.py')
     
-    if st.button('about us', key=2):
-        st.switch_page('pages/about_us.py')
+#     if st.button('about us', key=2):
+#         st.switch_page('pages/about_us.py')
         
-    if st.button('our model', key=3):
-        st.switch_page('pages/our_model.py')
+#     if st.button('our model', key=3):
+#         st.switch_page('pages/our_model.py')
 
-    if st.button('which horse', key=4):
-        st.switch_page('pages/which_horse.py')
+#     if st.button('which horse', key=4):
+#         st.switch_page('pages/which_horse.py')
         
 # with st.sidebar:
 #     st.page_link('webapp.py', label='home')

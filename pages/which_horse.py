@@ -72,18 +72,18 @@ st.line_chart(df)
 # Add more content as needed
 
 # Sidebar navigation
-with st.sidebar:
-    if st.button("home", key=13):
-        st.switch_page('webapp.py')
+# with st.sidebar:
+#     if st.button("home", key=13):
+#         st.switch_page('webapp.py')
     
-    if st.button('about us', key=14):
-        st.switch_page('pages/about_us.py')
+#     if st.button('about us', key=14):
+#         st.switch_page('pages/about_us.py')
         
-    if st.button('our model', key=15):
-        st.switch_page('pages/our_model.py')
+#     if st.button('our model', key=15):
+#         st.switch_page('pages/our_model.py')
 
-    if st.button('which horse', key=16):
-        st.switch_page('pages/which_horse.py')
+#     if st.button('which horse', key=16):
+#         st.switch_page('pages/which_horse.py')
         
 
     # st.page_link('webapp.py', label='home')
