@@ -28,7 +28,7 @@ team_data = [
 
 for team_member in team_data:
     st.subheader(team_member["name"])
-    # st.image(team_member["image_url"], width=150,  use_column_width=False)
+    st.image(team_member["image_url"], width=150,  use_column_width=False)
     st.text(team_member["bio"])
     st.markdown('---')  # Add a horizontal line between team members
     
